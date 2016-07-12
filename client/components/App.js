@@ -21,6 +21,13 @@ export default class App extends React.Component {
     }
   }
 
+  resetAccount = () => {
+    localStorage.clear();
+    this.setState({
+      accountHistory: Immutable.List()
+    })
+  }
+
   newTransaction = (transac) => {
     let newHistory = this.state.accountHistory.unshift(transac)
     console.log(newHistory)
@@ -35,7 +42,7 @@ export default class App extends React.Component {
     let y = 10;
     return(
     <div>
-    <Header />
+    <Header reset= {this.resetAccount} />
     <AccountHistory history = {this.state.accountHistory} />
     <Transaction balance = {y} newTransac = {this.newTransaction} />
     </div>

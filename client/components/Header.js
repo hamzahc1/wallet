@@ -6,7 +6,7 @@ export default class Header extends React.Component {
       <div>
       <ul>
       <li>Home</li>
-      <li>Reset</li>
+      <li onClick ={this.props.reset}>Reset</li>
       <li> <a href = 'https://github.com/hamzahc1/wallet'>Source</a></li>
       </ul>
       </div>

@@ -65,7 +65,7 @@ export default class Transaction extends React.Component{
           />
           <FormControl.Feedback />
         </FormGroup>
-        <Button href ='#' disabled ={this.getValidationState() === 'success' ? false : true} onClick ={this.processTransac.bind(this)}>Add</Button>
+        <Button href ='#' disabled ={this.getValidationState() === 'success' ? false : true} onClick ={this.processTransac}>Add</Button>
         <Button href ='#'>Withdraw</Button>
       </form>
     );
