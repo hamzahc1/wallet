@@ -38,6 +38,18 @@ export default class Transaction extends React.Component{
     this.setState({ depositValue: e.target.value });
   }
 
+  processTransac = () => {
+    let transac = {};
+    transac.amount = this.state.depositValue;
+    transac.date = Date.now()
+    this.setState({
+      depositValue:''
+    })
+    console.log(transac)
+
+    this.props.newTransac(transac)
+  }
+
   render() {
     return (
       <form>
@@ -53,7 +65,7 @@ export default class Transaction extends React.Component{
           />
           <FormControl.Feedback />
         </FormGroup>
-        <Button href ='#' disabled ={this.getValidationState() === 'success' ? false : true} onClick ={()=>{console.log("hellow")}}>Add</Button>
+        <Button href ='#' disabled ={this.getValidationState() === 'success' ? false : true} onClick ={this.processTransac.bind(this)}>Add</Button>
         <Button href ='#'>Withdraw</Button>
       </form>
     );
