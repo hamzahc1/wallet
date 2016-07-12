@@ -12,7 +12,7 @@ export default class AccountHistory extends React.Component {
     })
 
     return (
-      <Table>
+      <Table bordered striped>
         <thead>
           <tr>
             <th>Amount</th>
