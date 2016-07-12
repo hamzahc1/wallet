@@ -15,9 +15,9 @@ export default class App extends React.Component {
     }
   }
 
-  componentWillUpdate (newProps, newState) {
-    if(localStorage.history !== newState.history) {
-      localStorage.history = JSON.stringify(newState.history);
+  componentWillUpdate (nextProps, nextState) {
+    if(localStorage.history !== nextState.accountHistory) {
+      localStorage.history = JSON.stringify(nextState.accountHistory);
     }
   }
 
@@ -32,7 +32,6 @@ export default class App extends React.Component {
   }
 
   render(){
-    // let x = [{'amount': 10, 'date':'today'}, {'amount': 20, 'date':'yesterday'}];
     let y = 10;
     return(
     <div>
