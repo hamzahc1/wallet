@@ -5,7 +5,7 @@ export default class AccountItem extends React.Component {
     return (
       <tr>
         <td>{this.props.amount}</td>
-        <td>{this.props.date}</td>
+        <td>{(new Date(this.props.date)).toString()}</td>
       </tr>
       )
   }
