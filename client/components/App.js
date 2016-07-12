@@ -6,6 +6,13 @@ import AccountItem from './AccountItem';
 import Transaction from './Transaction'
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      accountHistory: localStorage.transactions ? JSON.parse(localStorage.transactions) : []
+    }
+  }
+
 
   render(){
     let x = [{'amount': 10, 'date':'today'}, {'amount': 20, 'date':'yesterday'}];
