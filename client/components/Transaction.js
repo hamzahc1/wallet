@@ -58,7 +58,6 @@ export default class Transaction extends React.Component{
       <div>
       <form>
         <FormGroup
-          controlId="formBasicText"
           validationState={this.getAdditionValidationState()}
         >
           <FormControl
@@ -74,7 +73,6 @@ export default class Transaction extends React.Component{
       <br/>
       <form>
         <FormGroup
-          controlId="formBasicText"
           validationState={this.getWithdrawalValidationState()}
         >
           <FormControl
