@@ -34,15 +34,12 @@ export default class App extends React.Component {
 
   calcBalance = (history) => {
     return history.reduce((acc, curr) => {
-      console.log(curr.amount)
      return acc + Number(curr.amount)
       },0)
   }
 
   newTransaction = (transac) => {
     let newHistory = this.state.accountHistory.push(transac)
-    // console.log(newHistory)
-    // console.log(this.calcBalance(newHistory))
     this.setState({
       accountHistory: newHistory,
       balance: this.calcBalance(newHistory)
@@ -54,7 +51,9 @@ export default class App extends React.Component {
     return(
     <div>
       <Header reset= {this.resetAccount} />
-      <div className ='container'>
+      <div className ='container' style = {{
+      maxWidth: 800,
+    }}>
       <AccountHistory history = {this.state.accountHistory} balance = {this.state.balance} />
       <Transaction balance = {this.state.balance} newTransac = {this.newTransaction} />
       </div>

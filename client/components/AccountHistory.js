@@ -25,7 +25,7 @@ export default class AccountHistory extends React.Component {
         {allHistory} 
         </tbody>
       </Table>
-      <h1>£ {Number(this.props.balance).toFixed(2)}</h1>
+      <h1>Balance: {Number(this.props.balance).toLocaleString('gb-GB', { style: 'currency', currency: 'GBP' })}</h1>
       </div>
       )
   }
