@@ -1,11 +1,13 @@
 import React from 'react';
 
 export default class AccountItem extends React.Component {
+
   render () {
+    let {amount, date} = this.props
     return (
       <tr>
-        <td className = {this.props.amount > 0 ? 'success' : 'danger'}>{Number(this.props.amount).toLocaleString('gb-GB', { style: 'currency', currency: 'GBP' })}</td>
-        <td>{(new Date(this.props.date)).toString()}</td>
+        <td className = {amount > 0 ? 'success' : 'danger'}>{Number(amount).toLocaleString('gb-GB', { style: 'currency', currency: 'GBP' })}</td>
+        <td>{(new Date(date)).toString()}</td>
       </tr>
       )
   }
