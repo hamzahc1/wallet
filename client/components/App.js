@@ -10,8 +10,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      accountHistory: localStorage.history ? Immutable.List(JSON.parse(localStorage.history)) : Immutable.List()
-      // balance: calcBalance(accountHistory)
+      accountHistory: localStorage.history ? Immutable.List(JSON.parse(localStorage.history)) : Immutable.List(),
+        balance: localStorage.balance ? localStorage.balance : 0
     }
   }
 
@@ -19,22 +19,32 @@ export default class App extends React.Component {
     if(localStorage.history !== nextState.accountHistory) {
       localStorage.history = JSON.stringify(nextState.accountHistory);
     }
+    if(localStorage.balance !== nextState.balance) {
+      localStorage.balance = JSON.stringify(nextState.balance);
+    }
   }
 
   resetAccount = () => {
     localStorage.clear();
     this.setState({
-      accountHistory: Immutable.List()
+      accountHistory: Immutable.List(),
+      balance: 0
     })
   }
 
+  calcBalance = (history) => {
+    return history.reduce((acc, curr) => {
+     return acc + parseInt(curr.amount)
+      },0)
+  }
+
   newTransaction = (transac) => {
-    let newHistory = this.state.accountHistory.unshift(transac)
-    console.log(newHistory)
-    // let newBalance = calcBalance(newHistory)
+    let newHistory = this.state.accountHistory.push(transac)
+    // console.log(newHistory)
+    console.log(this.calcBalance(newHistory))
     this.setState({
-      accountHistory: newHistory
-      // balance: newBalance
+      accountHistory: newHistory,
+      balance: this.calcBalance(newHistory)
     })
   }
 
@@ -43,7 +53,7 @@ export default class App extends React.Component {
     return(
     <div>
     <Header reset= {this.resetAccount} />
-    <AccountHistory history = {this.state.accountHistory} />
+    <AccountHistory history = {this.state.accountHistory} balance = {this.state.balance} />
     <Transaction balance = {y} newTransac = {this.newTransaction} />
     </div>
     )

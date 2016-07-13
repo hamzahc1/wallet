@@ -12,6 +12,7 @@ export default class AccountHistory extends React.Component {
     })
 
     return (
+      <div>
       <Table bordered striped>
         <thead>
           <tr>
@@ -24,6 +25,8 @@ export default class AccountHistory extends React.Component {
         {allHistory} 
         </tbody>
       </Table>
+      <h1>{this.props.balance}</h1>
+      </div>
       )
   }
 }
