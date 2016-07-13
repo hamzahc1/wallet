@@ -4,6 +4,12 @@ This is a simple application built in React that allows you to enter and remove 
 
 <img src = 'https://github.com/hamzahc1/wallet/blob/master/Wallet.gif'>
 
+<br>
+##Screenshot
+
+<img src = 'https://github.com/hamzahc1/wallet/blob/master/walletscreenshot.png'>
+
+<br>
 -State management with Immutable
 <br>
 -React with React-Bootstrap for responsive styling 
