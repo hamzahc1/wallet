@@ -21,7 +21,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "immutable": "^3.8.1",
     "path": "^0.12.7",
-    "react": "^15.2.1",
+    "react": "^15.0.1",
     "react-bootstrap": "^0.29.5",
     "react-dom": "^15.2.1",
     "webpack": "^1.13.1",
