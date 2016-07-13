@@ -17,7 +17,7 @@ export default class AccountHistory extends React.Component {
         <thead>
           <tr>
             <th>Amount</th>
-            <th>Date</th>
+            <th>Date & Time</th>
           </tr>
         </thead>
 
