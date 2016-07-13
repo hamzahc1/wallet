@@ -5,53 +5,76 @@ export default class Transaction extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      depositValue: ''
+      deposit: '',
+      withdrawal: ''
     }
   }
 
   getValidationState() {
-    const balance = this.props.balance;
-    if (this.state.depositValue <= balance) {
+    if (Number(this.state.withdrawal) <= this.props.balance && Number(this.state.withdrawal) > 0) {
       return 'success';
     }
-    else if (this.state.depositValue === balance) {
-      return 'warning';
-    }
-    else if (this.state.depositValue > balance) {
+    else if (Number(this.state.withdrawal) > this.props.balance) {
       return 'error';
     }
   }
 
   // isValidAmount = () => {
-  //   if (this.state.depositValue <= this.props.balance) {
+  //   if (this.state.deposit <= this.props.balance) {
   //     this.setState({validAmount: true});
   //   }
-  //   else if (this.state.depositValue === this.props.balance) {
+  //   else if (this.state.deposit === this.props.balance) {
   //     this.setState({validAmount: true});
   //   }
-  //   else if (this.state.depositValue > this.props.balance) {
+  //   else if (this.state.deposit > this.props.balance) {
   //     this.setState({validAmount: false});
   //   }
   // }
 
-  handleChange = (e) => {
-    this.setState({ depositValue: e.target.value });
+  handleAddChange = (e) => {
+    this.setState({ deposit: e.target.value });
   }
 
-  processTransac = () => {
+  handleWithdrawChange = (e) => {
+    this.setState({withdrawal: e.target.value});
+  }
+
+  processTransac = (type) => {
     let transac = {};
-    transac.amount = this.state.depositValue;
+    if(type === 'add') {
+      transac.amount = this.state.deposit;
+      this.setState({
+        deposit:''
+      })
+    } else if (type === 'withdraw') {
+      transac.amount = -1 * this.state.withdrawal;
+      this.setState({
+        withdrawal:''
+      })
+    }
     transac.date = Date.now()
-    this.setState({
-      depositValue:''
-    })
-    console.log(transac)
 
     this.props.newTransac(transac)
   }
 
   render() {
     return (
+      <div>
+      <form>
+        <FormGroup
+          controlId="formBasicText"
+        >
+          <FormControl
+            type="text"
+            value={this.state.deposit}
+            placeholder="Enter deposit amount"
+            onChange={this.handleAddChange}
+          />
+          <FormControl.Feedback />
+        </FormGroup>
+        <Button href ='#' disabled ={false} onClick ={()=>{this.processTransac('add')}}>Add</Button>
+      </form>
+
       <form>
         <FormGroup
           controlId="formBasicText"
@@ -59,15 +82,15 @@ export default class Transaction extends React.Component{
         >
           <FormControl
             type="text"
-            value={this.state.depositValue}
-            placeholder="Enter amount"
-            onChange={this.handleChange}
+            value={this.state.withdrawal}
+            placeholder="Enter withdrawal amount"
+            onChange={this.handleWithdrawChange}
           />
           <FormControl.Feedback />
         </FormGroup>
-        <Button href ='#' disabled ={this.getValidationState() === 'success' ? false : true} onClick ={this.processTransac}>Add</Button>
-        <Button href ='#'>Withdraw</Button>
+        <Button href ='#' disabled ={this.getValidationState() === 'success' ? false : true} onClick ={()=>{this.processTransac('withdraw')}}>Withdraw</Button>
       </form>
+      </div>
     );
   }
 };

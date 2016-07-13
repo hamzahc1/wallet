@@ -55,7 +55,7 @@ export default class App extends React.Component {
     <div>
     <Header reset= {this.resetAccount} />
     <AccountHistory history = {this.state.accountHistory} balance = {this.state.balance} />
-    <Transaction balance = {y} newTransac = {this.newTransaction} />
+    <Transaction balance = {this.state.balance} newTransac = {this.newTransaction} />
     </div>
     )
   }
