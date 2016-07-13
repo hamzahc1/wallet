@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormGroup, FormControl, Button} from 'react-bootstrap';
+import {FormGroup, FormControl, Button, HelpBlock, InputGroup} from 'react-bootstrap';
 
 export default class Transaction extends React.Component{
   constructor(props) {
@@ -10,7 +10,7 @@ export default class Transaction extends React.Component{
     }
   }
 
-  getValidationState() {
+  getWithdrawalValidationState() {
     if (Number(this.state.withdrawal) <= this.props.balance && Number(this.state.withdrawal) > 0) {
       return 'success';
     }
@@ -19,17 +19,13 @@ export default class Transaction extends React.Component{
     }
   }
 
-  // isValidAmount = () => {
-  //   if (this.state.deposit <= this.props.balance) {
-  //     this.setState({validAmount: true});
-  //   }
-  //   else if (this.state.deposit === this.props.balance) {
-  //     this.setState({validAmount: true});
-  //   }
-  //   else if (this.state.deposit > this.props.balance) {
-  //     this.setState({validAmount: false});
-  //   }
-  // }
+  getAdditionValidationState() {
+    if (Number(this.state.deposit) > 0) {
+      return 'success';
+    } else if (Number(this.state.deposit) <=0 && this.state.deposit !== '') {
+      return 'error';
+    }
+  }
 
   handleAddChange = (e) => {
     this.setState({ deposit: e.target.value });
@@ -63,6 +59,7 @@ export default class Transaction extends React.Component{
       <form>
         <FormGroup
           controlId="formBasicText"
+          validationState={this.getAdditionValidationState()}
         >
           <FormControl
             type="text"
@@ -72,13 +69,13 @@ export default class Transaction extends React.Component{
           />
           <FormControl.Feedback />
         </FormGroup>
-        <Button href ='#' disabled ={false} onClick ={()=>{this.processTransac('add')}}>Add</Button>
+        <Button bsStyle='success' href ='#' disabled = {this.getAdditionValidationState() === 'success' ? false : true} onClick ={()=>{this.processTransac('add')}}>Add</Button>
       </form>
-
+      <br/>
       <form>
         <FormGroup
           controlId="formBasicText"
-          validationState={this.getValidationState()}
+          validationState={this.getWithdrawalValidationState()}
         >
           <FormControl
             type="text"
@@ -88,7 +85,7 @@ export default class Transaction extends React.Component{
           />
           <FormControl.Feedback />
         </FormGroup>
-        <Button href ='#' disabled ={this.getValidationState() === 'success' ? false : true} onClick ={()=>{this.processTransac('withdraw')}}>Withdraw</Button>
+        <Button bsStyle='danger' href ='#' disabled ={this.getWithdrawalValidationState() === 'success' ? false : true} onClick ={()=>{this.processTransac('withdraw')}}>Withdraw</Button>
       </form>
       </div>
     );
