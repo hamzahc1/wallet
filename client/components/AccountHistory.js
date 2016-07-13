@@ -5,7 +5,8 @@ import AccountItem from './AccountItem';
 
 export default class AccountHistory extends React.Component {
   render () {
-    let allHistory = this.props.history.map((item, i) => {
+    let {history, balance} = this.props
+    let allHistory = history.map((item, i) => {
       return (
       <AccountItem key={i} amount = {item.amount} date = {item.date} />
       )
@@ -25,7 +26,7 @@ export default class AccountHistory extends React.Component {
         {allHistory} 
         </tbody>
       </Table>
-      <h2>Balance: {Number(this.props.balance).toLocaleString('gb-GB', { style: 'currency', currency: 'GBP' })}</h2>
+      <h2>Balance: {Number(balance).toLocaleString('gb-GB', { style: 'currency', currency: 'GBP' })}</h2>
       </div>
       )
   }
