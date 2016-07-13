@@ -1,5 +1,5 @@
 import React from 'react';
-import {FormGroup, FormControl, Button, HelpBlock, InputGroup} from 'react-bootstrap';
+import {FormGroup, FormControl, Button, HelpBlock, InputGroup, ButtonToolbar} from 'react-bootstrap';
 
 export default class Transaction extends React.Component{
   constructor(props) {
@@ -53,6 +53,7 @@ export default class Transaction extends React.Component{
     this.props.newTransac(transac)
   }
 
+//Randomly removes an amount from user's wallet
   generateRandom = () => {
     return Math.abs(Math.ceil(Math.random() * this.props.balance));
   }
@@ -87,9 +88,12 @@ export default class Transaction extends React.Component{
           />
           <FormControl.Feedback />
         </FormGroup>
+        <ButtonToolbar>
         <Button bsStyle='danger' href ='#' disabled ={this.getWithdrawalValidationState() === 'success' ? false : true} onClick ={()=>{this.processTransac('withdraw', this.state.withdrawal)}}>Withdraw</Button>
 
-        <Button bsStyle='warning' href ='#' disabled ={this.props.balance < 1 ? true : false} onClick ={()=>{this.processTransac('withdraw', this.generateRandom())}}>Random</Button>
+        <Button bsStyle='warning' href ='#' disabled ={this.props.balance < 1 ? true : false} onClick ={()=>{this.processTransac('withdraw', this.generateRandom())
+      }}>Roulette Withdrawal</Button>
+      </ButtonToolbar>
       </form>
       </div>
     );

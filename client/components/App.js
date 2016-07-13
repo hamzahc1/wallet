@@ -52,6 +52,7 @@ export default class App extends React.Component {
       <Header reset= {this.resetAccount} />
       <div className ='container' style = {{
       maxWidth: 800,
+      marginBottom: 40,
     }}>
       <AccountHistory history = {this.state.accountHistory} balance = {this.state.balance} />
       <Transaction balance = {this.state.balance} newTransac = {this.newTransaction} />

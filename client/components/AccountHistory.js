@@ -21,7 +21,6 @@ export default class AccountHistory extends React.Component {
             <th>Date & Time</th>
           </tr>
         </thead>
-
         <tbody>
         {allHistory} 
         </tbody>
