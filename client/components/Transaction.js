@@ -35,15 +35,15 @@ export default class Transaction extends React.Component{
     this.setState({withdrawal: e.target.value});
   }
 
-  processTransac = (type) => {
+  processTransac = (type, value) => {
     let transac = {};
     if(type === 'add') {
-      transac.amount = this.state.deposit;
+      transac.amount = value;
       this.setState({
         deposit:''
       })
     } else if (type === 'withdraw') {
-      transac.amount = -1 * this.state.withdrawal;
+      transac.amount = -1 * value;
       this.setState({
         withdrawal:''
       })
@@ -51,6 +51,10 @@ export default class Transaction extends React.Component{
     transac.date = Date.now()
 
     this.props.newTransac(transac)
+  }
+
+  generateRandom = () => {
+    return Math.abs(Math.ceil(Math.random() * this.props.balance));
   }
 
   render() {
@@ -68,7 +72,7 @@ export default class Transaction extends React.Component{
           />
           <FormControl.Feedback />
         </FormGroup>
-        <Button bsStyle='success' href ='#' disabled = {this.getAdditionValidationState() === 'success' ? false : true} onClick ={()=>{this.processTransac('add')}}>Add</Button>
+        <Button bsStyle='success' href ='#' disabled = {this.getAdditionValidationState() === 'success' ? false : true} onClick ={()=>{this.processTransac('add', this.state.deposit)}}>Add</Button>
       </form>
       <br/>
       <form>
@@ -83,7 +87,9 @@ export default class Transaction extends React.Component{
           />
           <FormControl.Feedback />
         </FormGroup>
-        <Button bsStyle='danger' href ='#' disabled ={this.getWithdrawalValidationState() === 'success' ? false : true} onClick ={()=>{this.processTransac('withdraw')}}>Withdraw</Button>
+        <Button bsStyle='danger' href ='#' disabled ={this.getWithdrawalValidationState() === 'success' ? false : true} onClick ={()=>{this.processTransac('withdraw', this.state.withdrawal)}}>Withdraw</Button>
+
+        <Button bsStyle='warning' href ='#' disabled ={this.props.balance < 1 ? true : false} onClick ={()=>{this.processTransac('withdraw', this.generateRandom())}}>Random</Button>
       </form>
       </div>
     );

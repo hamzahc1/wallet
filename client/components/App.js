@@ -47,7 +47,6 @@ export default class App extends React.Component {
   }
 
   render(){
-    let y = 10;
     return(
     <div>
       <Header reset= {this.resetAccount} />
