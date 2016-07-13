@@ -34,14 +34,15 @@ export default class App extends React.Component {
 
   calcBalance = (history) => {
     return history.reduce((acc, curr) => {
-     return acc + parseInt(curr.amount)
+      console.log(curr.amount)
+     return acc + Number(curr.amount)
       },0)
   }
 
   newTransaction = (transac) => {
     let newHistory = this.state.accountHistory.push(transac)
     // console.log(newHistory)
-    console.log(this.calcBalance(newHistory))
+    // console.log(this.calcBalance(newHistory))
     this.setState({
       accountHistory: newHistory,
       balance: this.calcBalance(newHistory)

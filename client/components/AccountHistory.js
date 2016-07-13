@@ -25,7 +25,7 @@ export default class AccountHistory extends React.Component {
         {allHistory} 
         </tbody>
       </Table>
-      <h1>{this.props.balance}</h1>
+      <h1>£ {Number(this.props.balance).toFixed(2)}</h1>
       </div>
       )
   }
